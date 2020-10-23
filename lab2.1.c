@@ -1,27 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h> // for exit
-int main()
+long long get_fibbonachi_via_cycle(int);
+ int main()
 {
-    unsigned long fib1 = 1, fib2 = 1, fib_sum, n, i = 0;
-    printf("Номер элемента ряда Фибоначчи: ");
-    scanf("%lu", &n);
-    if (n == 1)
-    {
-        printf("1");
-        exit(0);
-    }
-    if (n <= 0)
-    {
-        printf("error");
-        exit(0);
-    }
-    while (i < n - 2)
-    {
-        fib_sum = fib1 + fib2;
-        fib1 = fib2;
-        fib2 = fib_sum;
-        i++;
-    }
-    printf("%lu", fib2);
-    return 0;
+  int n;
+  printf ("РљР°РєРѕРµ С‡РёСЃР»Рѕ С„РёР±Р±РѕРЅР°С‡Рё РЅСѓР¶РЅРѕ РЅР°Р№С‚Рё: ");
+  scanf ("%d",&n);
+    printf("%llu\t",get_fibbonachi_via_cycle(n+1));
+}
+
+long long get_fibbonachi_via_cycle(int number)
+{
+  long fib1 = 1;
+  long fib_sum=1;
+  for (int i = 0; i < number - 2; i++)
+  {
+    fib1 += fib_sum;
+    fib_sum = fib1 - fib_sum;
+  }
+
+  return fib_sum;
 }
