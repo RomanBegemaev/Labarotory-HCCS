@@ -1,59 +1,78 @@
 #include <stdio.h>
-#include <stdlib.h>
-
-char* allsim = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // input 36 symbol
-
-int toint(char d)
-{
-    for (int i = 0; i < 36; i++)
-    {
-        if (allsim[i] == d)
-            return i;
-    }
-}
-
-char* power(char* number, int source, int target)
-{
-    int j = 0, l = 0, p = 0, k = 10;
-    char* buf;
-    l = strlen(number); //strlen - how many characters are in a line
-    for (int i = 0; i < l; i++)
-    {
-        p = p * source + toint(number[i]);
-    }
-    buf = (char*)calloc(100, 1); //  allocate memory for a dynamic array of integers
-    while (1)
-    {
-        j = p % target;
-        buf[k--] = allsim[j];
-        l++;
-        p /= target;
-        if (p == 0)
-        {
-            break; // stop function
-        }
-    }
-    j = 0;
-    k++;
-    while (1)
-    {
-        buf[j++] = buf[k++];
-        if (k == 100)
-        {
-            break; // stop function
-        }
-    }
-    buf = (char*)realloc(buf, (l + 1)); // when adding a new number, we increase the array by 1
-    return buf;
-}
+#include <string.h>
+char int_to_char(int);
+void power(int, int, int);
 
 int main()
 {
-    char* P = "200"; // number 
-    char* Q;
+  int number = 2020, source=10, target=32;
+  if (target > 36 || source > 10)
+  {
+    printf("Error");
+  }
+  else
+  {
+   power(number, source, target);
+  }
+}
 
-    Q = power(P, 11, 32); //number,source,target
-    printf("%s \n", Q);
+char int_to_char(int number)
+{
+  if (number >= 0 && number <= 9) 
+  {
+    return number + '0';
+  }
+  else if (number >= 10 && number <= 36) 
+  {
+    return number - 10 + 'A';
+  }
+  else 
+  {
+    return ' ';
+  }
+}
 
-    return 0;
+void power(int number, int source, int target)
+{
+  int result_in_ten = 0;
+  int line_lengt = sizeof(number) / sizeof(int);
+  char result[30];
+
+  for (int q = 0; q < 30; q++)  
+  {
+    result[q] = 0;
+  }
+
+  while (number > 0)
+  {
+    static int power = 1;
+    result_in_ten = result_in_ten + number % 10 * power;
+    power  *= source;
+    number /= 10;
+    if (number <= 0) 
+    {
+      power = 1;
+    }
+  }
+  
+  while (result_in_ten > 0) 
+  {
+    static int q = 0;
+    result[q++] = int_to_char(result_in_ten % target);
+    result_in_ten /= target;
+    if (result_in_ten <= 0) 
+    {
+      q = 0;
+    }
+  }
+  int length = strlen(result);
+  for (int q = 0; q < length / 2; q++)
+  {
+    result[q] += result[length - 1 - q];
+    result[length - 1 - q] = result[q] - result[length - q - 1];
+    result[q] -= result[length - 1 - q];
+  }
+
+
+  printf("%s", result);
 }
