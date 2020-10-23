@@ -22,7 +22,7 @@ unsigned long Fibbonachi(int number)
 int main()
 {
     int n;
-    printf("Какое число фиббоначи нужно найти: ");
+    printf("РљР°РєРѕРµ С‡РёСЃР»Рѕ С„РёР±Р±РѕРЅР°С‡Рё РЅСѓР¶РЅРѕ РЅР°Р№С‚Рё: ");
     scanf("%d", &n);
     if (n <= 0)
     {
