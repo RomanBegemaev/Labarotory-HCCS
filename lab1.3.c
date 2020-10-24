@@ -17,6 +17,6 @@ int main(void)
 {
     int power=3, number=5;
     //scanf("%d%d", &power, &number);
-    printf("%d", get_power(power, number));
+    printf("%d", get_power(number, power));
     return 0;
 }
