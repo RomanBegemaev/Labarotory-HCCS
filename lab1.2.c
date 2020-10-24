@@ -3,14 +3,10 @@
 int is_simple(int number)
 {
   int num=0;
-  if (number < 2)
-  {
-    printf("Число 1 не является простым и составным, введите другое число ");
-    exit(0);
-  }
   if ((number==0) || (number==1))
   {
-    return 0;
+    printf("error ");
+    exit(0);
   }
   else
   {
