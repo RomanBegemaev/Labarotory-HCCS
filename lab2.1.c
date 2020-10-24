@@ -6,7 +6,7 @@ long long get_fibbonachi_via_cycle(int);
   int n;
   printf ("Какое число фиббоначи нужно найти: ");
   scanf ("%d",&n);
-    printf("%llu\t",get_fibbonachi_via_cycle(n+1));
+  printf("%llu\t",get_fibbonachi_via_cycle(n+1));
 }
 
 long long get_fibbonachi_via_cycle(int number)
